@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>安全マニュアル（見本）SK200-0001</title>
+<!-- 重機QR 安全マニュアル管理 デモ用の見本。実機の取扱説明書ではない。
+     PDF化: Chrome headless --print-to-pdf（scratchpad に出してから docs/ へ cp） -->
+<style>
+  @page { size: A4; margin: 0; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; margin:0; padding:0; }
+  body { font-family: "Hiragino Sans","Hiragino Kaku Gothic ProN",sans-serif; color:#1f2a4d;
+         line-break: strict; word-break: auto-phrase; text-wrap: pretty; }
+  .pg { width:210mm; height:297mm; padding:16mm 16mm 18mm; position:relative; page-break-after:always; overflow:hidden; }
+  .pg:last-child { page-break-after:auto; }
+  .wm { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+  .wm span { font-size:120pt; font-weight:900; color:rgba(180,58,70,.07); transform:rotate(-30deg); letter-spacing:.2em; }
+  .band { position:absolute; left:0; right:0; bottom:0; height:12mm; background:#152663; color:#dfe6ff; font-size:8pt;
+          display:flex; align-items:center; justify-content:space-between; padding:0 16mm; }
+  .band b { color:#fff; }
+  .hd { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:3px solid #152663; padding-bottom:5px; margin-bottom:14px; }
+  .hd .t { font-size:10pt; font-weight:800; color:#152663; }
+  .hd .m { font-size:8.5pt; color:#4a5b93; }
+  h1 { font-size:30pt; font-weight:900; color:#152663; line-height:1.25; }
+  h2 { font-size:15pt; font-weight:800; color:#152663; margin:16px 0 8px; padding-left:10px; border-left:6px solid #243f9b; }
+  p, li { font-size:10.5pt; line-height:1.8; }
+  ul, ol { margin:4px 0 4px 1.4em; }
+  table { width:100%; border-collapse:collapse; font-size:10pt; margin:6px 0; }
+  th { background:#eaf0ff; color:#152663; text-align:left; padding:6px 9px; border:1px solid #c9d3ee; width:34%; }
+  td { padding:6px 9px; border:1px solid #c9d3ee; }
+  .chk th { width:auto; } .chk td.c { width:16mm; text-align:center; }
+  .sample { display:inline-block; background:#b43a46; color:#fff; font-weight:800; font-size:11pt; padding:3px 12px; border-radius:3px; letter-spacing:.1em; }
+  .warn { border:2px solid #b43a46; background:#fbeef0; padding:10px 14px; margin:10px 0; }
+  .warn .wt { font-weight:800; color:#b43a46; font-size:11pt; margin-bottom:3px; }
+  .caut { border:2px solid #ca8a04; background:#fefce8; padding:10px 14px; margin:10px 0; }
+  .caut .wt { font-weight:800; color:#a16207; font-size:11pt; margin-bottom:3px; }
+  .cover { display:flex; flex-direction:column; justify-content:center; height:240mm; }
+  .cover .lab { font-size:12pt; color:#4a5b93; font-weight:700; letter-spacing:.1em; }
+  .cover .mc { margin-top:14mm; border-top:1px solid #c9d3ee; padding-top:8mm; }
+  .note { font-size:9pt; color:#4a5b93; }
+</style>
+</head>
+<body>
+
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="cover">
+    <div><span class="sample">見本</span></div>
+    <div class="lab" style="margin-top:10mm;">レンタル機 安心ファイル</div>
+    <h1 style="margin-top:4mm;">安全マニュアル<br>油圧ショベル 20tクラス</h1>
+    <div class="mc">
+      <table>
+        <tr><th>機番</th><td><b>SK200-0001</b></td></tr>
+        <tr><th>QR番号</th><td>QR-000123</td></tr>
+        <tr><th>所属</th><td>東海支社（見本）</td></tr>
+        <tr><th>版</th><td>第1版（見本）</td></tr>
+      </table>
+    </div>
+    <div class="warn" style="margin-top:12mm;">
+      <div class="wt">この資料について</div>
+      <p>本書は「重機QR 安全マニュアル管理」の表示確認用に作成した<b>見本</b>です。実機の取扱説明書ではありません。数値・内容は説明用であり、実際の機械の操作・点検には、必ずメーカーの取扱説明書に従ってください。</p>
+    </div>
+  </div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>1 / 4</span></div>
+</div>
+
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">1. 能力・仕様</div></div>
+  <h2>1. 能力・仕様（見本値）</h2>
+  <p class="note">労働安全衛生規則 第666条第2号の「能力」に相当する記載の見本です。数値は説明用です。</p>
+  <table>
+    <tr><th>機械の種類</th><td>油圧ショベル（クローラ式）</td></tr>
+    <tr><th>運転質量</th><td>約 20 t（見本値）</td></tr>
+    <tr><th>バケット容量</th><td>約 0.8 m³（見本値）</td></tr>
+    <tr><th>最大掘削深さ</th><td>約 6.5 m（見本値）</td></tr>
+    <tr><th>最大掘削半径</th><td>約 9.9 m（見本値）</td></tr>
+    <tr><th>後端旋回半径</th><td>約 2.9 m（見本値）</td></tr>
+    <tr><th>燃料</th><td>軽油</td></tr>
+    <tr><th>必要な資格</th><td>車両系建設機械（整地・運搬・積込み用及び掘削用）運転技能講習 修了 ほか</td></tr>
+  </table>
+  <h2>2. 安心ファイルの同封物</h2>
+  <table class="chk">
+    <tr><th>書類</th><th style="width:28mm;">この機械</th></tr>
+    <tr><td>取扱説明書</td><td class="c">同封</td></tr>
+    <tr><td>レンタル機総合サポート制度のご案内</td><td class="c">同封</td></tr>
+    <tr><td>出庫前点検表</td><td class="c">同封</td></tr>
+    <tr><td>質量一覧（本体・アタッチメント）</td><td class="c">同封</td></tr>
+    <tr><td>簡易取扱い注意事項</td><td class="c">同封</td></tr>
+    <tr><td>特定自主検査記録表（任意）</td><td class="c">同封</td></tr>
+  </table>
+  <p class="note">保管場所：シート背面のポケット（機種ごとに異なります）</p>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>2 / 4</span></div>
+</div>
+
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">3. 使用上の注意</div></div>
+  <h2>3. 使用上の注意（見本）</h2>
+  <p class="note">第666条第2号の「特性その他その使用上注意すべき事項」に相当する記載の見本です。</p>
+  <div class="warn"><div class="wt">危険　旋回範囲に人を入れない</div><p>運転中は旋回範囲・作業範囲への立入りを禁止し、誘導者を配置してください。</p></div>
+  <div class="warn"><div class="wt">危険　用途外の使用をしない</div><p>荷のつり上げなど、主たる用途以外の使用は行わないでください。</p></div>
+  <div class="caut"><div class="wt">注意　作業前に必ず点検する</div><p>始業前に、ブレーキ・旋回ロック・警報装置・油漏れ・亀裂の有無を確認してください。</p></div>
+  <div class="caut"><div class="wt">注意　傾斜地・軟弱地盤</div><p>転倒・転落のおそれがある場所では、地盤の補強や誘導者の配置を行い、シートベルトを着用してください。</p></div>
+  <div class="caut"><div class="wt">注意　降車時</div><p>バケットを地面に下ろし、エンジンを止め、キーを抜いて保管してください。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>3 / 4</span></div>
+</div>
+
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">4. 出庫前点検表</div></div>
+  <h2>4. 出庫前点検表（見本）</h2>
+  <p class="note">第666条第1号「あらかじめ点検」の記録の見本です。システムでは、整備担当がQRを読んで同じ項目を入力します。</p>
+  <table class="chk">
+    <tr><th>点検項目</th><th style="width:22mm;">結果</th></tr>
+    <tr><td>エンジンオイル・作動油・冷却水の量</td><td class="c">良</td></tr>
+    <tr><td>油圧ホース・配管の漏れ、損傷</td><td class="c">良</td></tr>
+    <tr><td>ブレーキ・旋回ロックの作動</td><td class="c">良</td></tr>
+    <tr><td>警報装置・ライト・ミラー</td><td class="c">良</td></tr>
+    <tr><td>履帯の張り、ブーム・アームの亀裂</td><td class="c">良</td></tr>
+    <tr><td>バケット・ツースの摩耗</td><td class="c">良</td></tr>
+    <tr><td><b>安心ファイルの搭載</b>（保管場所に6種そろっているか）</td><td class="c"><b>済</b></td></tr>
+  </table>
+  <table style="margin-top:10px;">
+    <tr><th>点検日時</th><td>2026年10月5日 9:12（見本）</td></tr>
+    <tr><th>点検者</th><td>整備担当（見本）</td></tr>
+  </table>
+  <h2>5. お問い合わせ（見本）</h2>
+  <p>故障・異常に気づいたときは、使用を中止し、出庫した支社へご連絡ください。</p>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>4 / 4</span></div>
+</div>
+
+</body>
+</html>
