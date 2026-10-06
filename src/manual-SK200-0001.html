@@ -4,129 +4,551 @@
 <meta charset="utf-8">
 <title>安全マニュアル（見本）SK200-0001</title>
 <!-- 重機QR 安全マニュアル管理 デモ用の見本。実機の取扱説明書ではない。
-     PDF化: Chrome headless --print-to-pdf（scratchpad に出してから docs/ へ cp） -->
+     PDF化: python3 src/build.py（{{P}}/{{T}} を振ってから Chrome headless で PDF。出力は docs/m/QR-000123.pdf）
+     ⚠️ 公開URL docs/m/QR-000123.pdf は印刷済み資料のQRが指している。パスを変えない -->
 <style>
   @page { size: A4; margin: 0; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; margin:0; padding:0; }
   body { font-family: "Hiragino Sans","Hiragino Kaku Gothic ProN",sans-serif; color:#1f2a4d;
          line-break: strict; word-break: auto-phrase; text-wrap: pretty; }
-  .pg { width:210mm; height:297mm; padding:16mm 16mm 18mm; position:relative; page-break-after:always; overflow:hidden; }
+  .pg { width:210mm; height:297mm; padding:15mm 16mm 18mm; position:relative; page-break-after:always; overflow:hidden; }
   .pg:last-child { page-break-after:auto; }
   .wm { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
-  .wm span { font-size:120pt; font-weight:900; color:rgba(180,58,70,.07); transform:rotate(-30deg); letter-spacing:.2em; }
-  .band { position:absolute; left:0; right:0; bottom:0; height:12mm; background:#152663; color:#dfe6ff; font-size:8pt;
+  .wm span { font-size:120pt; font-weight:900; color:rgba(180,58,70,.06); transform:rotate(-30deg); letter-spacing:.2em; }
+  .band { position:absolute; left:0; right:0; bottom:0; height:11mm; background:#152663; color:#dfe6ff; font-size:7.8pt;
           display:flex; align-items:center; justify-content:space-between; padding:0 16mm; }
   .band b { color:#fff; }
-  .hd { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:3px solid #152663; padding-bottom:5px; margin-bottom:14px; }
-  .hd .t { font-size:10pt; font-weight:800; color:#152663; }
+  .hd { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:3px solid #152663; padding-bottom:5px; margin-bottom:12px; }
+  .hd .t { font-size:9.5pt; font-weight:800; color:#152663; }
   .hd .m { font-size:8.5pt; color:#4a5b93; }
   h1 { font-size:30pt; font-weight:900; color:#152663; line-height:1.25; }
-  h2 { font-size:15pt; font-weight:800; color:#152663; margin:16px 0 8px; padding-left:10px; border-left:6px solid #243f9b; }
-  p, li { font-size:10.5pt; line-height:1.8; }
-  ul, ol { margin:4px 0 4px 1.4em; }
-  table { width:100%; border-collapse:collapse; font-size:10pt; margin:6px 0; }
-  th { background:#eaf0ff; color:#152663; text-align:left; padding:6px 9px; border:1px solid #c9d3ee; width:34%; }
-  td { padding:6px 9px; border:1px solid #c9d3ee; }
-  .chk th { width:auto; } .chk td.c { width:16mm; text-align:center; }
+  h2 { font-size:15pt; font-weight:800; color:#152663; margin:4px 0 8px; padding-left:10px; border-left:6px solid #243f9b; }
+  h3 { font-size:11.5pt; font-weight:800; color:#243f9b; margin:12px 0 5px; }
+  p, li { font-size:10pt; line-height:1.75; }
+  ul, ol { margin:3px 0 3px 1.4em; }
+  table { width:100%; border-collapse:collapse; font-size:9.5pt; margin:6px 0; }
+  th { background:#eaf0ff; color:#152663; text-align:left; padding:5px 8px; border:1px solid #c9d3ee; }
+  td { padding:5px 8px; border:1px solid #c9d3ee; vertical-align:top; line-height:1.55; }
+  .kv th { width:34%; }
+  td.c { text-align:center; width:15mm; }
+  td.r { text-align:right; }
   .sample { display:inline-block; background:#b43a46; color:#fff; font-weight:800; font-size:11pt; padding:3px 12px; border-radius:3px; letter-spacing:.1em; }
-  .warn { border:2px solid #b43a46; background:#fbeef0; padding:10px 14px; margin:10px 0; }
-  .warn .wt { font-weight:800; color:#b43a46; font-size:11pt; margin-bottom:3px; }
-  .caut { border:2px solid #ca8a04; background:#fefce8; padding:10px 14px; margin:10px 0; }
-  .caut .wt { font-weight:800; color:#a16207; font-size:11pt; margin-bottom:3px; }
-  .cover { display:flex; flex-direction:column; justify-content:center; height:240mm; }
+  .bx { border:2px solid; padding:8px 12px; margin:8px 0; }
+  .bx .wt { font-weight:800; font-size:10.5pt; margin-bottom:2px; }
+  .bx p { font-size:9.6pt; line-height:1.65; }
+  .d { border-color:#b43a46; background:#fbeef0; } .d .wt { color:#b43a46; }
+  .w { border-color:#d9480f; background:#fff4ec; } .w .wt { color:#c2410c; }
+  .c { border-color:#ca8a04; background:#fefce8; } .c .wt { color:#a16207; }
+  .i { border-color:#243f9b; background:#eaf0ff; } .i .wt { color:#243f9b; }
+  .cover { display:flex; flex-direction:column; justify-content:center; height:245mm; }
   .cover .lab { font-size:12pt; color:#4a5b93; font-weight:700; letter-spacing:.1em; }
-  .cover .mc { margin-top:14mm; border-top:1px solid #c9d3ee; padding-top:8mm; }
-  .note { font-size:9pt; color:#4a5b93; }
+  .note { font-size:8.6pt; color:#4a5b93; line-height:1.6; }
+  .toc td { border:none; border-bottom:1px dotted #9aa7cf; padding:6px 4px; font-size:10.5pt; }
+  .toc td.r { width:14mm; }
+  .two { display:flex; gap:12px; } .two > div { flex:1; }
+  .fig { border:1px solid #c9d3ee; background:#fbfcff; padding:8px; text-align:center; }
+  .fig svg { width:100%; height:auto; display:block; }
+  .fig .cap { font-size:8.5pt; color:#4a5b93; margin-top:4px; }
+  .flow { display:flex; flex-direction:column; gap:0; }
+  .flow .s { border:2px solid #243f9b; padding:7px 12px; background:#fff; }
+  .flow .s b { color:#152663; }
+  .flow .a { text-align:center; color:#243f9b; font-size:13pt; line-height:1.2; }
+  .sig td { height:12mm; }
 </style>
 </head>
 <body>
 
+<!-- 表紙 -->
 <div class="pg">
   <div class="wm"><span>見本</span></div>
   <div class="cover">
     <div><span class="sample">見本</span></div>
     <div class="lab" style="margin-top:10mm;">レンタル機 安心ファイル</div>
     <h1 style="margin-top:4mm;">安全マニュアル<br>油圧ショベル 20tクラス</h1>
-    <div class="mc">
-      <table>
+    <p style="font-size:12pt;color:#4a5b93;margin-top:3mm;">能力・使用上の注意・点検記録</p>
+    <div style="margin-top:12mm;border-top:1px solid #c9d3ee;padding-top:8mm;">
+      <table class="kv">
         <tr><th>機番</th><td><b>SK200-0001</b></td></tr>
         <tr><th>QR番号</th><td>QR-000123</td></tr>
         <tr><th>所属</th><td>東海支社（見本）</td></tr>
-        <tr><th>版</th><td>第1版（見本）</td></tr>
+        <tr><th>版</th><td>第1版（見本）　2026年10月</td></tr>
       </table>
     </div>
-    <div class="warn" style="margin-top:12mm;">
+    <div class="bx d" style="margin-top:12mm;">
       <div class="wt">この資料について</div>
-      <p>本書は「重機QR 安全マニュアル管理」の表示確認用に作成した<b>見本</b>です。実機の取扱説明書ではありません。数値・内容は説明用であり、実際の機械の操作・点検には、必ずメーカーの取扱説明書に従ってください。</p>
+      <p>本書は「重機QR 安全マニュアル管理」の表示確認用に作成した<b>見本</b>です。実機の取扱説明書ではありません。数値・内容は説明用であり、実際の機械の操作・点検・整備には、必ずメーカーの取扱説明書と法令に従ってください。</p>
     </div>
   </div>
-  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>1 / 4</span></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
 </div>
 
+<!-- 目次 -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">目次</div></div>
+  <h2>目次</h2>
+  <table class="toc">
+    <tr><td>はじめに ／ 本書の使い方 ／ 安全表示の見方</td><td class="r">3</td></tr>
+    <tr><td>1. 能力・仕様（主要諸元）</td><td class="r">4</td></tr>
+    <tr><td>2. 作業範囲</td><td class="r">5</td></tr>
+    <tr><td>3. 質量一覧（本体・アタッチメント）</td><td class="r">6</td></tr>
+    <tr><td>4. 安全の基本</td><td class="r">7</td></tr>
+    <tr><td>5. 安全ラベルの位置</td><td class="r">8</td></tr>
+    <tr><td>6. 作業開始前の点検</td><td class="r">9</td></tr>
+    <tr><td>7. 運転席と操作レバー</td><td class="r">10</td></tr>
+    <tr><td>8. 作業中の注意</td><td class="r">11</td></tr>
+    <tr><td>9. 用途外使用の禁止</td><td class="r">12</td></tr>
+    <tr><td>10. 走行・移動・積込み</td><td class="r">13</td></tr>
+    <tr><td>11. 作業の終了と駐車</td><td class="r">14</td></tr>
+    <tr><td>12. 給油・日常の手入れ</td><td class="r">15</td></tr>
+    <tr><td>13. 異常時・事故時の対応</td><td class="r">16</td></tr>
+    <tr><td>14. 出庫前点検表（記録）</td><td class="r">17</td></tr>
+    <tr><td>15. 特定自主検査の記録</td><td class="r">18</td></tr>
+    <tr><td>16. 安心ファイルの同封物と保管場所</td><td class="r">19</td></tr>
+    <tr><td>17. サポートのご案内 ／ 改訂履歴</td><td class="r">20</td></tr>
+  </table>
+  <div class="bx i" style="margin-top:14px;"><div class="wt">QRコードで最新版を確認できます</div><p>機体に貼付のQRコードをスマートフォンで読み取ると、本書の最新版が表示されます。紙の本書と内容が異なる場合は、QRコードで表示される版が最新です。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- はじめに -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">はじめに</div></div>
+  <h2>はじめに</h2>
+  <p>このたびはレンタル機をご利用いただき、ありがとうございます。本書は、この機械を安全にお使いいただくために、機械の能力と使用上の注意をまとめたものです。運転・点検を行う前に必ずお読みください。</p>
+  <p>本書は、労働安全衛生規則 第666条（機械等貸与者の講ずべき措置）に基づき、貸与する機械の能力・特性・使用上注意すべき事項をお知らせする書面として交付しています。</p>
+  <h3>本書の使い方</h3>
+  <ul>
+    <li>本書は機械に搭載されている「安心ファイル」に入っています。機械から持ち出さないでください。</li>
+    <li>運転する方が交代するときは、新しく運転する方にも本書の内容を伝えてください。</li>
+    <li>詳しい操作方法・整備方法は、同封の取扱説明書をご確認ください。</li>
+    <li>汚損・紛失した場合は、QRコードから最新版をご覧いただくか、出庫した支社へご連絡ください。</li>
+  </ul>
+  <h3>安全表示の見方</h3>
+  <p>本書と機械のラベルでは、危険の程度を次の4つに分けて表示しています。</p>
+  <div class="bx d"><div class="wt">危険</div><p>取扱いを誤った場合、死亡または重傷を負う危険が差し迫っているもの。</p></div>
+  <div class="bx w"><div class="wt">警告</div><p>取扱いを誤った場合、死亡または重傷を負うおそれがあるもの。</p></div>
+  <div class="bx c"><div class="wt">注意</div><p>取扱いを誤った場合、軽傷を負うおそれ、または物的損害が発生するおそれがあるもの。</p></div>
+  <div class="bx i"><div class="wt">お知らせ</div><p>機械を正しく、長くお使いいただくための情報。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 1 能力 -->
 <div class="pg">
   <div class="wm"><span>見本</span></div>
   <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">1. 能力・仕様</div></div>
-  <h2>1. 能力・仕様（見本値）</h2>
-  <p class="note">労働安全衛生規則 第666条第2号の「能力」に相当する記載の見本です。数値は説明用です。</p>
+  <h2>1. 能力・仕様（主要諸元）</h2>
+  <p class="note">第666条第2号の「能力」に相当する記載の見本です。数値はすべて説明用の見本値で、実機の諸元ではありません。</p>
+  <h3>機械本体</h3>
+  <table class="kv">
+    <tr><th>機械の種類</th><td>油圧ショベル（クローラ式・後方超小旋回でない標準機）</td></tr>
+    <tr><th>運転質量</th><td>約 20,000 kg（見本値）</td></tr>
+    <tr><th>エンジン定格出力</th><td>約 110 kW（見本値）</td></tr>
+    <tr><th>燃料タンク容量</th><td>約 320 L（見本値）</td></tr>
+    <tr><th>作動油タンク容量</th><td>約 140 L（見本値）</td></tr>
+  </table>
+  <h3>作業装置</h3>
+  <table class="kv">
+    <tr><th>標準バケット容量</th><td>約 0.8 m³（見本値）</td></tr>
+    <tr><th>バケット掘削力</th><td>約 140 kN（見本値）</td></tr>
+    <tr><th>アーム掘削力</th><td>約 100 kN（見本値）</td></tr>
+    <tr><th>旋回速度</th><td>約 11 min⁻¹（見本値）</td></tr>
+  </table>
+  <h3>走行</h3>
+  <table class="kv">
+    <tr><th>走行速度（高速／低速）</th><td>約 5.5 ／ 3.4 km/h（見本値）</td></tr>
+    <tr><th>登坂能力</th><td>約 35°（見本値）</td></tr>
+    <tr><th>接地圧</th><td>約 45 kPa（見本値）</td></tr>
+    <tr><th>全長 × 全幅 × 全高（輸送時）</th><td>約 9.5 × 2.8 × 3.0 m（見本値）</td></tr>
+  </table>
+  <h3>運転に必要な資格</h3>
+  <ul>
+    <li>機体質量3t以上の車両系建設機械（整地・運搬・積込み用及び掘削用）の運転：<b>運転技能講習の修了</b></li>
+    <li>公道を走行する場合：道路交通法に基づく運転免許（機械の区分による）</li>
+  </ul>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 2 作業範囲 -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">2. 作業範囲</div></div>
+  <h2>2. 作業範囲</h2>
+  <div class="fig">
+    <svg viewBox="0 0 520 300" font-family="Hiragino Sans, sans-serif" font-size="11">
+      <line x1="10" y1="200" x2="510" y2="200" stroke="#4a5b93" stroke-width="1.5"/>
+      <text x="14" y="194" fill="#4a5b93">地面</text>
+      <path d="M150 200 A220 220 0 0 1 470 160" fill="none" stroke="#9aa7cf" stroke-dasharray="5 4"/>
+      <path d="M150 200 Q330 300 440 230" fill="none" stroke="#9aa7cf" stroke-dasharray="5 4"/>
+      <rect x="60" y="178" width="120" height="22" rx="11" fill="#2b3a6b"/>
+      <rect x="72" y="140" width="96" height="36" fill="#243f9b"/>
+      <rect x="140" y="112" width="30" height="34" fill="#6f86d6"/>
+      <line x1="160" y1="140" x2="270" y2="70" stroke="#152663" stroke-width="9" stroke-linecap="round"/>
+      <line x1="270" y1="70" x2="350" y2="150" stroke="#152663" stroke-width="7" stroke-linecap="round"/>
+      <path d="M345 145 l22 10 l-6 22 l-22 -6 z" fill="#152663"/>
+      <line x1="120" y1="230" x2="440" y2="230" stroke="#b43a46"/><text x="240" y="246" fill="#b43a46">A 最大掘削半径 約9.9m</text>
+      <line x1="480" y1="200" x2="480" y2="280" stroke="#b43a46"/><text x="400" y="292" fill="#b43a46">B 最大掘削深さ 約6.5m</text>
+      <line x1="40" y1="200" x2="40" y2="40" stroke="#b43a46"/><text x="46" y="50" fill="#b43a46">C 最大掘削高さ 約9.6m</text>
+      <line x1="60" y1="215" x2="120" y2="215" stroke="#243f9b"/><text x="42" y="268" fill="#243f9b">D 後端旋回半径 約2.9m</text>
+    </svg>
+    <div class="cap">作業範囲図（見本値・模式図）</div>
+  </div>
   <table>
-    <tr><th>機械の種類</th><td>油圧ショベル（クローラ式）</td></tr>
-    <tr><th>運転質量</th><td>約 20 t（見本値）</td></tr>
-    <tr><th>バケット容量</th><td>約 0.8 m³（見本値）</td></tr>
-    <tr><th>最大掘削深さ</th><td>約 6.5 m（見本値）</td></tr>
-    <tr><th>最大掘削半径</th><td>約 9.9 m（見本値）</td></tr>
-    <tr><th>後端旋回半径</th><td>約 2.9 m（見本値）</td></tr>
-    <tr><th>燃料</th><td>軽油</td></tr>
-    <tr><th>必要な資格</th><td>車両系建設機械（整地・運搬・積込み用及び掘削用）運転技能講習 修了 ほか</td></tr>
+    <tr><th>記号</th><th>項目</th><th>数値（見本値）</th></tr>
+    <tr><td class="c">A</td><td>最大掘削半径</td><td>約 9.9 m</td></tr>
+    <tr><td class="c">B</td><td>最大掘削深さ</td><td>約 6.5 m</td></tr>
+    <tr><td class="c">C</td><td>最大掘削高さ</td><td>約 9.6 m</td></tr>
+    <tr><td class="c">D</td><td>後端旋回半径</td><td>約 2.9 m</td></tr>
+    <tr><td class="c">E</td><td>最大ダンプ高さ</td><td>約 6.8 m</td></tr>
   </table>
-  <h2>2. 安心ファイルの同封物</h2>
-  <table class="chk">
-    <tr><th>書類</th><th style="width:28mm;">この機械</th></tr>
-    <tr><td>取扱説明書</td><td class="c">同封</td></tr>
-    <tr><td>レンタル機総合サポート制度のご案内</td><td class="c">同封</td></tr>
-    <tr><td>出庫前点検表</td><td class="c">同封</td></tr>
-    <tr><td>質量一覧（本体・アタッチメント）</td><td class="c">同封</td></tr>
-    <tr><td>簡易取扱い注意事項</td><td class="c">同封</td></tr>
-    <tr><td>特定自主検査記録表（任意）</td><td class="c">同封</td></tr>
-  </table>
-  <p class="note">保管場所：シート背面のポケット（機種ごとに異なります）</p>
-  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>2 / 4</span></div>
+  <div class="bx w"><div class="wt">警告　旋回範囲＝立入禁止範囲</div><p>作業範囲と後端旋回範囲（D）には人を立ち入らせないでください。カウンタウェイトの後方は運転席から見えにくく、挟まれ事故が起きやすい位置です。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
 </div>
 
+<!-- 3 質量一覧 -->
 <div class="pg">
   <div class="wm"><span>見本</span></div>
-  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">3. 使用上の注意</div></div>
-  <h2>3. 使用上の注意（見本）</h2>
-  <p class="note">第666条第2号の「特性その他その使用上注意すべき事項」に相当する記載の見本です。</p>
-  <div class="warn"><div class="wt">危険　旋回範囲に人を入れない</div><p>運転中は旋回範囲・作業範囲への立入りを禁止し、誘導者を配置してください。</p></div>
-  <div class="warn"><div class="wt">危険　用途外の使用をしない</div><p>荷のつり上げなど、主たる用途以外の使用は行わないでください。</p></div>
-  <div class="caut"><div class="wt">注意　作業前に必ず点検する</div><p>始業前に、ブレーキ・旋回ロック・警報装置・油漏れ・亀裂の有無を確認してください。</p></div>
-  <div class="caut"><div class="wt">注意　傾斜地・軟弱地盤</div><p>転倒・転落のおそれがある場所では、地盤の補強や誘導者の配置を行い、シートベルトを着用してください。</p></div>
-  <div class="caut"><div class="wt">注意　降車時</div><p>バケットを地面に下ろし、エンジンを止め、キーを抜いて保管してください。</p></div>
-  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>3 / 4</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">3. 質量一覧</div></div>
+  <h2>3. 質量一覧（本体・アタッチメント）</h2>
+  <p class="note">輸送・積込み・吊り上げの計画にお使いください。数値は見本値です。</p>
+  <table>
+    <tr><th>区分</th><th>品名</th><th style="text-align:right;">質量（見本値）</th><th>備考</th></tr>
+    <tr><td>本体</td><td>油圧ショベル 本体（標準バケット付）</td><td class="r">約 20,000 kg</td><td>運転質量</td></tr>
+    <tr><td>本体</td><td>カウンタウェイト</td><td class="r">約 3,800 kg</td><td>取外し不可</td></tr>
+    <tr><td>バケット</td><td>標準バケット 0.8 m³</td><td class="r">約 650 kg</td><td></td></tr>
+    <tr><td>バケット</td><td>法面バケット</td><td class="r">約 720 kg</td><td>オプション</td></tr>
+    <tr><td>バケット</td><td>スケルトンバケット</td><td class="r">約 800 kg</td><td>オプション</td></tr>
+    <tr><td>アタッチメント</td><td>油圧ブレーカー</td><td class="r">約 1,600 kg</td><td>配管仕様機のみ</td></tr>
+    <tr><td>アタッチメント</td><td>圧砕機</td><td class="r">約 2,000 kg</td><td>配管仕様機のみ</td></tr>
+    <tr><td>アタッチメント</td><td>フォーク（つかみ機）</td><td class="r">約 1,200 kg</td><td>配管仕様機のみ</td></tr>
+    <tr><td>付属品</td><td>クイックカプラ</td><td class="r">約 300 kg</td><td>装着時は本体質量に加算</td></tr>
+  </table>
+  <div class="bx w"><div class="wt">警告　指定外のアタッチメントを付けない</div><p>本機の能力を超える質量のアタッチメントを装着すると、転倒・破損のおそれがあります。装着できるアタッチメントは、出庫した支社にご確認ください。</p></div>
+  <div class="bx i"><div class="wt">お知らせ</div><p>アタッチメントを交換した場合、作業範囲・安定性が変わります。交換後は作業計画を見直してください。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
 </div>
 
+<!-- 4 安全の基本 -->
 <div class="pg">
   <div class="wm"><span>見本</span></div>
-  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">4. 出庫前点検表</div></div>
-  <h2>4. 出庫前点検表（見本）</h2>
-  <p class="note">第666条第1号「あらかじめ点検」の記録の見本です。システムでは、整備担当がQRを読んで同じ項目を入力します。</p>
-  <table class="chk">
-    <tr><th>点検項目</th><th style="width:22mm;">結果</th></tr>
-    <tr><td>エンジンオイル・作動油・冷却水の量</td><td class="c">良</td></tr>
-    <tr><td>油圧ホース・配管の漏れ、損傷</td><td class="c">良</td></tr>
-    <tr><td>ブレーキ・旋回ロックの作動</td><td class="c">良</td></tr>
-    <tr><td>警報装置・ライト・ミラー</td><td class="c">良</td></tr>
-    <tr><td>履帯の張り、ブーム・アームの亀裂</td><td class="c">良</td></tr>
-    <tr><td>バケット・ツースの摩耗</td><td class="c">良</td></tr>
-    <tr><td><b>安心ファイルの搭載</b>（保管場所に6種そろっているか）</td><td class="c"><b>済</b></td></tr>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">4. 安全の基本</div></div>
+  <h2>4. 安全の基本</h2>
+  <h3>4-1　運転する人</h3>
+  <ul><li>必要な資格を持つ人が運転してください（1章参照）。</li><li>体調が悪いとき、飲酒・眠気を誘う薬を服用したときは運転しないでください。</li><li>本書と取扱説明書を読み、機械の特性を理解してから運転してください。</li></ul>
+  <h3>4-2　服装と保護具</h3>
+  <ul><li>ヘルメット・安全靴を着用し、袖口・裾が引っかからない服装にしてください。</li><li>運転中はシートベルトを着用してください。</li><li>騒音・粉じんの多い作業では、耳栓・防じんマスク・保護めがねを使ってください。</li></ul>
+  <h3>4-3　作業計画</h3>
+  <ul><li>作業前に、地形・地盤・地下埋設物・架空電線を調べ、作業の方法と機械の経路を決めてください。</li><li>作業計画の内容は、作業に関わる全員に周知してください。</li><li>誘導者を配置する場合は、合図の方法を事前に決めてください。</li></ul>
+  <div class="bx d"><div class="wt">危険　機械に人を乗せない</div><p>運転席以外の場所（バケット・ステップ・カウンタウェイト上など）に人を乗せないでください。</p></div>
+  <div class="bx w"><div class="wt">警告　改造しない</div><p>安全装置を外したり、機械を改造したりしないでください。故障・事故の原因になります。</p></div>
+  <div class="bx c"><div class="wt">注意　乗り降りは3点支持で</div><p>手すりとステップを使い、両手両足のうち3点で体を支えて乗り降りしてください。飛び降りないでください。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 5 ラベル位置 -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">5. 安全ラベルの位置</div></div>
+  <h2>5. 安全ラベルの位置</h2>
+  <div class="fig">
+    <svg viewBox="0 0 520 250" font-family="Hiragino Sans, sans-serif" font-size="12" font-weight="700">
+      <rect x="70" y="180" width="260" height="34" rx="17" fill="#2b3a6b"/>
+      <rect x="90" y="110" width="210" height="66" fill="#243f9b"/>
+      <rect x="230" y="70" width="60" height="68" fill="#6f86d6"/>
+      <line x1="270" y1="110" x2="380" y2="40" stroke="#152663" stroke-width="12" stroke-linecap="round"/>
+      <line x1="380" y1="40" x2="460" y2="150" stroke="#152663" stroke-width="9" stroke-linecap="round"/>
+      <path d="M452 142 l28 12 l-7 28 l-28 -8 z" fill="#152663"/>
+      <rect x="236" y="90" width="18" height="18" fill="#fff" stroke="#111"/><text x="240" y="85" fill="#b43a46">QR</text>
+      <g fill="#b43a46"><circle cx="110" cy="130" r="11"/><circle cx="200" cy="150" r="11"/><circle cx="262" cy="125" r="11"/><circle cx="330" cy="72" r="11"/><circle cx="160" cy="196" r="11"/><circle cx="296" cy="150" r="11"/></g>
+      <g fill="#fff" text-anchor="middle"><text x="110" y="134">1</text><text x="200" y="154">2</text><text x="262" y="129">3</text><text x="330" y="76">4</text><text x="160" y="200">5</text><text x="296" y="154">6</text></g>
+    </svg>
+    <div class="cap">左側面（模式図）　赤丸＝安全ラベル　QR＝本書につながるQRコード</div>
+  </div>
+  <table>
+    <tr><th style="width:10mm;">No.</th><th>ラベル</th><th>内容</th></tr>
+    <tr><td class="c">1</td><td>旋回範囲 立入禁止</td><td>カウンタウェイト後方への立入禁止</td></tr>
+    <tr><td class="c">2</td><td>高温注意</td><td>エンジン・マフラー周辺のやけど</td></tr>
+    <tr><td class="c">3</td><td>運転前に本書を読む</td><td>運転席入口。QRコードと並べて貼付</td></tr>
+    <tr><td class="c">4</td><td>作業範囲 立入禁止</td><td>ブーム・アームの可動範囲</td></tr>
+    <tr><td class="c">5</td><td>巻き込み注意</td><td>履帯・起動輪への巻き込み</td></tr>
+    <tr><td class="c">6</td><td>高圧油注意</td><td>油圧ホースからの噴出</td></tr>
   </table>
-  <table style="margin-top:10px;">
+  <div class="bx c"><div class="wt">注意</div><p>ラベルがはがれたり読めなくなったりした場合は、出庫した支社へご連絡ください。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 6 点検 -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">6. 作業開始前の点検</div></div>
+  <h2>6. 作業開始前の点検</h2>
+  <p>その日の作業を始める前に、次の項目を点検してください。異常があれば使用を中止し、出庫した支社へご連絡ください。</p>
+  <table>
+    <tr><th style="width:24mm;">区分</th><th>点検項目</th><th>見るところ</th></tr>
+    <tr><td rowspan="3">機械の周り</td><td>油漏れ・水漏れ</td><td>機体の下、油圧ホースの継ぎ目</td></tr>
+    <tr><td>亀裂・変形</td><td>ブーム・アーム・バケットの溶接部</td></tr>
+    <tr><td>履帯</td><td>張り、シューの欠損、異物のかみ込み</td></tr>
+    <tr><td rowspan="3">油脂・水</td><td>エンジンオイル</td><td>レベルゲージの範囲内</td></tr>
+    <tr><td>作動油</td><td>タンクの油面計の範囲内</td></tr>
+    <tr><td>冷却水</td><td>リザーブタンクの範囲内</td></tr>
+    <tr><td rowspan="4">運転席</td><td>ブレーキ・旋回ロック</td><td>確実にかかるか</td></tr>
+    <tr><td>警報装置・ホーン</td><td>鳴るか</td></tr>
+    <tr><td>ライト・ミラー・カメラ</td><td>点灯するか、見えるか</td></tr>
+    <tr><td>計器・警告灯</td><td>エンジン始動後に警告灯が消えるか</td></tr>
+    <tr><td>安心ファイル</td><td>本書・取扱説明書</td><td>保管場所に入っているか（16章）</td></tr>
+  </table>
+  <div class="bx w"><div class="wt">警告　点検はエンジンを止めて</div><p>点検は、平坦な場所でバケットを地面に下ろし、エンジンを止めてから行ってください。</p></div>
+  <div class="bx i"><div class="wt">お知らせ</div><p>点検結果は、機体のQRコードを読み取って記録することもできます（14章参照）。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 7 操作レバー -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">7. 運転席と操作レバー</div></div>
+  <h2>7. 運転席と操作レバー</h2>
+  <div class="two">
+    <div class="fig"><svg viewBox="0 0 220 170" font-family="Hiragino Sans, sans-serif" font-size="11">
+      <circle cx="110" cy="85" r="16" fill="#243f9b"/><text x="96" y="130" fill="#152663" font-weight="700">左レバー</text>
+      <line x1="110" y1="60" x2="110" y2="25" stroke="#152663" stroke-width="2" marker-end="url(#ar)"/><text x="118" y="34">アーム 出す</text>
+      <line x1="110" y1="110" x2="110" y2="145" stroke="#152663" stroke-width="2"/><text x="118" y="150">アーム 引く</text>
+      <line x1="85" y1="85" x2="40" y2="85" stroke="#152663" stroke-width="2"/><text x="6" y="78">左旋回</text>
+      <line x1="135" y1="85" x2="180" y2="85" stroke="#152663" stroke-width="2"/><text x="170" y="78">右旋回</text>
+    </svg><div class="cap">左レバー（見本）</div></div>
+    <div class="fig"><svg viewBox="0 0 220 170" font-family="Hiragino Sans, sans-serif" font-size="11">
+      <circle cx="110" cy="85" r="16" fill="#243f9b"/><text x="96" y="130" fill="#152663" font-weight="700">右レバー</text>
+      <line x1="110" y1="60" x2="110" y2="25" stroke="#152663" stroke-width="2"/><text x="118" y="34">ブーム 下げ</text>
+      <line x1="110" y1="110" x2="110" y2="145" stroke="#152663" stroke-width="2"/><text x="118" y="150">ブーム 上げ</text>
+      <line x1="85" y1="85" x2="40" y2="85" stroke="#152663" stroke-width="2"/><text x="2" y="78">バケット掘削</text>
+      <line x1="135" y1="85" x2="180" y2="85" stroke="#152663" stroke-width="2"/><text x="150" y="78">バケット放土</text>
+    </svg><div class="cap">右レバー（見本）</div></div>
+  </div>
+  <div class="bx w" style="margin-top:10px;"><div class="wt">警告　操作パターンを必ず確認する</div><p>操作レバーのパターンは機械によって異なることがあります。運転前に、運転席のパターン表示と実際の動きが一致しているか、周囲に人がいない状態でゆっくり動かして確認してください。</p></div>
+  <h3>運転席の主な装置</h3>
+  <table>
+    <tr><th style="width:36%;">装置</th><th>使い方</th></tr>
+    <tr><td>安全ロックレバー</td><td>運転席を離れるとき、乗り降りするときは必ずロック位置にする</td></tr>
+    <tr><td>走行レバー・ペダル</td><td>前進・後進・その場旋回。走行方向は下部走行体の向きで変わる</td></tr>
+    <tr><td>エンジン回転ダイヤル</td><td>作業内容に合わせて回転数を調整</td></tr>
+    <tr><td>ホーン</td><td>動き出す前、旋回する前に鳴らして周囲に知らせる</td></tr>
+  </table>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 8 作業中 -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">8. 作業中の注意</div></div>
+  <h2>8. 作業中の注意</h2>
+  <div class="bx d"><div class="wt">危険　旋回範囲に人を入れない</div><p>運転中は作業範囲・旋回範囲への立入りを禁止し、必要に応じて誘導者を配置してください。旋回前には後方の安全を確認し、ホーンで合図してください。</p></div>
+  <div class="bx d"><div class="wt">危険　架空電線に近づかない</div><p>ブーム・アームが電線に接近すると感電のおそれがあります。電線の近くで作業する場合は、電力会社と協議し、監視人を配置してください。</p></div>
+  <div class="bx w"><div class="wt">警告　地下埋設物を確認する</div><p>ガス管・水道管・電力ケーブル等の位置を事前に確認し、試掘や手掘りで確かめてから掘削してください。</p></div>
+  <div class="bx w"><div class="wt">警告　法肩・路肩に注意する</div><p>掘削した穴の縁や盛土の路肩は崩れやすく、転落・転倒のおそれがあります。十分な距離を取り、必要に応じて誘導者を配置してください。</p></div>
+  <div class="bx w"><div class="wt">警告　傾斜地での作業</div><p>傾斜地では横向きの作業・旋回を避け、上り下りの方向で作業してください。急な旋回は転倒の原因になります。</p></div>
+  <div class="bx c"><div class="wt">注意　視界の悪い場所</div><p>夜間・悪天候・粉じんで視界が悪いときは、照明を確保し、作業を中止することも検討してください。</p></div>
+  <div class="bx c"><div class="wt">注意　異音・異臭に気づいたら</div><p>すぐに作業を止め、エンジンを停止して点検してください（13章）。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 9 用途外 -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">9. 用途外使用の禁止</div></div>
+  <h2>9. 用途外使用の禁止</h2>
+  <p>本機は掘削・積込みのための機械です。次のような主たる用途以外の使い方はしないでください。</p>
+  <table>
+    <tr><th style="width:42%;">禁止する使い方</th><th>理由</th></tr>
+    <tr><td>バケットやアームで荷を吊り上げる</td><td>吊り荷の落下・機械の転倒</td></tr>
+    <tr><td>バケットに人を乗せて昇降させる</td><td>墜落・挟まれ</td></tr>
+    <tr><td>バケットで杭や構造物を強くたたく</td><td>作業装置の破損</td></tr>
+    <tr><td>旋回の力で物を押し動かす</td><td>旋回装置の破損・転倒</td></tr>
+    <tr><td>本機で他の車両をけん引する</td><td>けん引具の破断・転倒</td></tr>
+  </table>
+  <div class="bx d"><div class="wt">危険　荷の吊り上げをしない</div><p>本機はクレーン機能付きの仕様ではありません。荷の吊り上げには、クレーン機能付きの機械または移動式クレーンを手配してください。</p></div>
+  <div class="bx i"><div class="wt">お知らせ　クレーン機能付きの機械が必要な場合</div><p>クレーン機能付きの油圧ショベルもご用意しています。作業内容をお知らせいただければ、適した機械をご案内します。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 10 走行 -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">10. 走行・移動・積込み</div></div>
+  <h2>10. 走行・移動・積込み</h2>
+  <h3>10-1　走行するとき</h3>
+  <ul><li>走行前に、下部走行体の向き（起動輪の位置）を確認してください。向きによってレバーと進む方向が逆になります。</li><li>バケットを地面から少し上げ、アームを引いた姿勢で走行してください。</li><li>坂道ではゆっくり走行し、坂の途中での方向転換はしないでください。</li></ul>
+  <h3>10-2　トレーラーへの積込み・積下ろし</h3>
+  <ol><li>トレーラーを平坦で堅い場所に止め、車輪に歯止めをする</li><li>道板の角度・幅・掛かり具合を確認する</li><li>誘導者の合図に従い、低速でまっすぐ上る</li><li>荷台の上では旋回しない（やむを得ない場合は最小限に）</li><li>作業装置を下ろし、機体を固縛する</li></ol>
+  <div class="bx d"><div class="wt">危険　道板の上で方向を変えない</div><p>道板の上で向きを変えると、踏み外して転落するおそれがあります。</p></div>
+  <div class="bx w"><div class="wt">警告　輸送時の高さ・幅</div><p>積載時の高さ・幅を確認し、通行できる経路を選んでください（1章 輸送時寸法）。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 11 終了 -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">11. 作業の終了と駐車</div></div>
+  <h2>11. 作業の終了と駐車</h2>
+  <h3>運転席を離れるとき（短時間でも必ず）</h3>
+  <ol><li>平坦で堅い場所に止める</li><li>バケットを地面に下ろす</li><li>安全ロックレバーをロック位置にする</li><li>エンジンを止め、キーを抜く</li></ol>
+  <h3>その日の作業を終えるとき</h3>
+  <ul><li>落石・浸水・崩壊のおそれのない場所に駐車してください。</li><li>坂道に駐車する場合は、バケットを地面に下ろし、履帯に歯止めをしてください。</li><li>キーは責任者が保管し、第三者が運転できないようにしてください。</li><li>機械の周囲に「立入禁止」の表示をしてください。</li></ul>
+  <div class="bx w"><div class="wt">警告　キーを付けたまま離れない</div><p>第三者が勝手に運転し、事故が起きるおそれがあります。</p></div>
+  <div class="bx c"><div class="wt">注意　寒冷時</div><p>凍結のおそれがあるときは、履帯の泥を落とし、板などの上に駐車してください。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 12 給油 -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">12. 給油・日常の手入れ</div></div>
+  <h2>12. 給油・日常の手入れ</h2>
+  <h3>給油</h3>
+  <ul><li>燃料は軽油です。ガソリン・灯油を入れないでください。</li><li>給油はエンジンを止め、火気のない場所で行ってください。</li><li>こぼれた燃料はすぐに拭き取ってください。</li></ul>
+  <h3>日常の手入れ（ご利用者様にお願いする範囲）</h3>
+  <table>
+    <tr><th>項目</th><th>頻度</th><th>内容</th></tr>
+    <tr><td>給脂（グリースアップ）</td><td>毎日</td><td>作業装置の各ピン部（取扱説明書の給脂位置図）</td></tr>
+    <tr><td>エアクリーナ</td><td>粉じんの多い現場では毎日</td><td>インジケータの確認</td></tr>
+    <tr><td>履帯の泥落とし</td><td>作業終了時</td><td>泥のかみ込み・凍結の防止</td></tr>
+    <tr><td>窓・ミラーの清掃</td><td>毎日</td><td>視界の確保</td></tr>
+  </table>
+  <div class="bx w"><div class="wt">警告　修理・調整はしない</div><p>油圧装置・電気装置の修理や調整は、ご利用者様では行わないでください。異常があれば支社へご連絡ください。</p></div>
+  <div class="bx c"><div class="wt">注意　高温部</div><p>作業直後のエンジン・作動油・マフラーは高温です。冷えてから手入れしてください。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 13 異常時 -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">13. 異常時・事故時の対応</div></div>
+  <h2>13. 異常時・事故時の対応</h2>
+  <div class="two">
+    <div><h3>機械に異常があるとき</h3>
+      <div class="flow">
+        <div class="s"><b>1. 作業を止める</b><br>作業装置を地面に下ろす</div><div class="a">↓</div>
+        <div class="s"><b>2. エンジンを止める</b><br>安全ロック・キーを抜く</div><div class="a">↓</div>
+        <div class="s"><b>3. 状況を確認する</b><br>警告灯・漏れ・異音の箇所</div><div class="a">↓</div>
+        <div class="s"><b>4. 支社へ連絡する</b><br>機番（SK200-0001）を伝える</div>
+      </div></div>
+    <div><h3>事故が起きたとき</h3>
+      <div class="flow">
+        <div class="s"><b>1. 二次災害を防ぐ</b><br>機械を止め、周囲を立入禁止に</div><div class="a">↓</div>
+        <div class="s"><b>2. 救護・通報</b><br>けが人の救護、119番・110番</div><div class="a">↓</div>
+        <div class="s"><b>3. 現場責任者へ報告</b><br>元請・事業者の手順に従う</div><div class="a">↓</div>
+        <div class="s"><b>4. 支社へ連絡する</b><br>機械の状態を伝える</div>
+      </div></div>
+  </div>
+  <div class="bx i" style="margin-top:12px;"><div class="wt">連絡の際にお伝えいただくこと</div><p>機番（機体のQRラベルに記載）／現場の場所／異常の内容（警告灯・音・漏れ）／機械を動かせるかどうか</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 14 出庫前点検表 -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">14. 出庫前点検表</div></div>
+  <h2>14. 出庫前点検表（記録）</h2>
+  <p class="note">第666条第1号「あらかじめ点検」の記録の見本です。システムでは、整備担当がQRを読んで同じ項目を入力し、写真とともに機番ごとに保存します。</p>
+  <table>
+    <tr><th>点検項目</th><th style="width:16mm;text-align:center;">結果</th><th style="width:38mm;">備考</th></tr>
+    <tr><td>エンジンオイル・作動油・冷却水の量</td><td class="c">良</td><td></td></tr>
+    <tr><td>燃料の量</td><td class="c">良</td><td>満タン</td></tr>
+    <tr><td>油圧ホース・配管の漏れ、損傷</td><td class="c">良</td><td></td></tr>
+    <tr><td>ブーム・アーム・バケットの亀裂、変形</td><td class="c">良</td><td></td></tr>
+    <tr><td>バケット・ツースの摩耗、ピンの抜け</td><td class="c">良</td><td></td></tr>
+    <tr><td>履帯の張り、シューの欠損</td><td class="c">良</td><td></td></tr>
+    <tr><td>ブレーキ・旋回ロックの作動</td><td class="c">良</td><td></td></tr>
+    <tr><td>安全ロックレバーの作動</td><td class="c">良</td><td></td></tr>
+    <tr><td>警報装置・ホーン・ライト</td><td class="c">良</td><td></td></tr>
+    <tr><td>ミラー・カメラの視界</td><td class="c">良</td><td></td></tr>
+    <tr><td>計器・警告灯</td><td class="c">良</td><td></td></tr>
+    <tr><td>安全ラベルの汚損・はがれ</td><td class="c">良</td><td></td></tr>
+    <tr><td>QRラベルの読み取り</td><td class="c">良</td><td>QR-000123</td></tr>
+    <tr><td><b>安心ファイルの搭載</b>（保管場所に6種そろっているか）</td><td class="c"><b>済</b></td><td>写真 1枚</td></tr>
+  </table>
+  <table class="kv sig" style="margin-top:8px;">
     <tr><th>点検日時</th><td>2026年10月5日 9:12（見本）</td></tr>
     <tr><th>点検者</th><td>整備担当（見本）</td></tr>
   </table>
-  <h2>5. お問い合わせ（見本）</h2>
-  <p>故障・異常に気づいたときは、使用を中止し、出庫した支社へご連絡ください。</p>
-  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>4 / 4</span></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 15 特自検 -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">15. 特定自主検査の記録</div></div>
+  <h2>15. 特定自主検査の記録</h2>
+  <p>車両系建設機械は、1年以内ごとに1回、資格を持つ検査者による特定自主検査を受けることが定められています。本機の直近の検査記録は次のとおりです。</p>
+  <table class="kv">
+    <tr><th>検査の種類</th><td>特定自主検査（年次）</td></tr>
+    <tr><th>検査年月日</th><td>2026年4月15日（見本）</td></tr>
+    <tr><th>次回検査期限</th><td>2027年4月（見本）</td></tr>
+    <tr><th>検査実施者</th><td>検査業者（見本）</td></tr>
+    <tr><th>検査結果</th><td>異常なし（見本）</td></tr>
+  </table>
+  <h3>主な検査項目（抜粋・見本）</h3>
+  <table>
+    <tr><th>区分</th><th>検査項目</th><th style="width:16mm;text-align:center;">結果</th></tr>
+    <tr><td>原動機</td><td>機関の性能、冷却装置、燃料装置</td><td class="c">良</td></tr>
+    <tr><td>動力伝達装置</td><td>減速機、走行モータ</td><td class="c">良</td></tr>
+    <tr><td>走行装置</td><td>履帯、遊動輪、上下転輪</td><td class="c">良</td></tr>
+    <tr><td>操縦装置</td><td>操作レバー、パイロット系統</td><td class="c">良</td></tr>
+    <tr><td>制動装置</td><td>走行ブレーキ、旋回ブレーキ</td><td class="c">良</td></tr>
+    <tr><td>作業装置</td><td>ブーム、アーム、バケット、シリンダ</td><td class="c">良</td></tr>
+    <tr><td>油圧装置</td><td>油圧ポンプ、制御弁、ホース</td><td class="c">良</td></tr>
+    <tr><td>電気系統</td><td>警報装置、照明、計器</td><td class="c">良</td></tr>
+    <tr><td>車体関係</td><td>フレーム、ヘッドガード、運転席</td><td class="c">良</td></tr>
+  </table>
+  <p class="note">機体には検査済の標章が貼付されています。検査記録の写しが必要な場合は支社へお申し付けください。</p>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 16 同封物 -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">16. 安心ファイルの同封物と保管場所</div></div>
+  <h2>16. 安心ファイルの同封物と保管場所</h2>
+  <table>
+    <tr><th>書類</th><th style="width:22mm;text-align:center;">この機械</th><th>内容</th></tr>
+    <tr><td>取扱説明書</td><td class="c">同封</td><td>操作・点検・整備の詳細</td></tr>
+    <tr><td>本書（安全マニュアル）</td><td class="c">同封</td><td>能力・使用上の注意</td></tr>
+    <tr><td>サポートのご案内</td><td class="c">同封</td><td>故障時の連絡先・補償（17章）</td></tr>
+    <tr><td>出庫前点検表</td><td class="c">同封</td><td>出庫時の点検結果（14章）</td></tr>
+    <tr><td>質量一覧</td><td class="c">同封</td><td>本体・アタッチメントの質量（3章）</td></tr>
+    <tr><td>簡易取扱い注意事項</td><td class="c">同封</td><td>運転席で確認できる要点1枚</td></tr>
+    <tr><td>特定自主検査記録表</td><td class="c">任意</td><td>直近の検査記録（15章）</td></tr>
+  </table>
+  <h3>保管場所</h3>
+  <table class="kv">
+    <tr><th>この機械</th><td><b>シート背面のポケット</b></td></tr>
+    <tr><th>ミニショベル（キャノピ）</th><td>シート背面、またはキャノピ内（運転席頭上）</td></tr>
+    <tr><th>大型ショベル（キャビン）</th><td>キャビン内</td></tr>
+    <tr><th>車輛</th><td>車内（助手席前など）、または出庫時に手渡し</td></tr>
+    <tr><th>搭載場所のない機械</th><td>出庫伝票と一緒に手渡し</td></tr>
+  </table>
+  <div class="bx i"><div class="wt">紙の書類が見当たらないとき</div><p>機体のQRコードを読み取ると、同じ書類の最新版をスマートフォンで確認できます。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
+</div>
+
+<!-- 17 サポート -->
+<div class="pg">
+  <div class="wm"><span>見本</span></div>
+  <div class="hd"><div class="t">安全マニュアル（見本）　SK200-0001</div><div class="m">17. サポートのご案内 ／ 改訂履歴</div></div>
+  <h2>17. サポートのご案内（見本）</h2>
+  <table class="kv">
+    <tr><th>故障・異常のご連絡</th><td>出庫した支社（見本）　受付 8:00〜17:00</td></tr>
+    <tr><th>夜間・休日</th><td>緊急連絡先（見本）</td></tr>
+    <tr><th>ご連絡時にお伝えいただくこと</th><td>機番・現場の場所・異常の内容</td></tr>
+    <tr><th>代替機の手配</th><td>故障の状況により、代替機をご用意します（見本）</td></tr>
+  </table>
+  <div class="bx i"><div class="wt">お知らせ</div><p>補償制度の内容・適用条件は、レンタル契約書およびサポート制度のご案内をご確認ください。</p></div>
+  <h2 style="margin-top:16px;">改訂履歴</h2>
+  <table>
+    <tr><th style="width:18mm;">版</th><th style="width:34mm;">日付</th><th>内容</th></tr>
+    <tr><td>第1版</td><td>2026年10月（見本）</td><td>初版</td></tr>
+  </table>
+  <div class="bx d" style="margin-top:16px;"><div class="wt">この資料について（再掲）</div><p>本書は「重機QR 安全マニュアル管理」の表示確認用に作成した<b>見本</b>です。実機の取扱説明書ではありません。数値・内容は説明用です。</p></div>
+  <div class="band"><span><b>見本</b>　システム表示確認用（実機の取扱説明書ではありません）</span><span>{{P}} / {{T}}</span></div>
 </div>
 
 </body>
