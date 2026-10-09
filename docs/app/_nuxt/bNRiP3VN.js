@@ -1,0 +1,1 @@
+import{an as r}from"./BJktq5lP.js";var o={name:"Row",extends:r,inject:["$rows"],mounted:function(){var n;(n=this.$rows)===null||n===void 0||n.add(this.$)},unmounted:function(){var n;(n=this.$rows)===null||n===void 0||n.delete(this.$)},render:function(){return null}};export{o as default};
